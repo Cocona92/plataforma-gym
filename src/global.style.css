@@ -1,0 +1,88 @@
+
+.big-title {
+    font-family: 'Arial Black', sans-serif;
+    font-size: 60px;
+    font-weight: bold;
+    margin-bottom: 48px;
+    color: #6E5034;
+  }
+
+.page {
+  width: 100vw;
+    min-height: 100vh;
+    place-items: center;
+    padding: 16px;
+    background: #F1F3E0;
+  }
+
+   .card {
+    width: 100%;
+    max-width: 420px;
+    background: #778873;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(179, 184, 178, 0.08);
+  }
+
+    .title {
+    margin: 0;
+    font-size: 28px;
+  }
+  .subtitle {
+    margin-top: 6px;
+    margin-bottom: 18px;
+    color: #D2DCB6;
+  }
+  .error {
+    background: #D2DCB6;
+    border: 1px solid #A1BC98;
+    color: #7a0000;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+  .form {
+    display: grid;
+    gap: 12px;
+  }
+  .label {
+    display: grid;
+    gap: 6px;
+    font-size: 14px;
+  }
+  .input {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #D2DCB6;
+    outline: none;
+    font-size: 14px;
+  }
+  .button {
+    margin-top: 6px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: none;
+    background: #111827;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .footerText {
+    margin-top: 14px;
+    font-size: 14px;
+    color: #444;
+  }
+  .link {
+    color: #D2DCB6;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+   .success {
+    background: #D2DCB6;
+    border: 1px solid #778873;
+    color: #778873;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 12;
+  }
