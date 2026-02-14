@@ -1,26 +1,32 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { signIn } from "../services/auth";
+import { useNavigate } from "react-router-dom";
 
-import "../global.style.css"
+import "../global.style.css";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-
-  function handleSubmit(e) {
-    e.preventDefault() 
-
+  const handleLogin = async (e) => {
+    e.preventDefault();
     if (!email || !password) {
-      setError("Por favor completa el email y contraseña.")
-      return
+      setError("Por favor completa el email y contraseña.");
+      return;
     }
-    setError("")
-
-    console.log("Login con:", { email, password })
-    alert("Login correcto")
-  }
+    setError("");
+    try {
+      await signIn({ email, password });
+      console.log("Login con:", { email, password });
+      alert("Login correcto");
+      navigate("/dashboard");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <div className="page">
@@ -31,7 +37,7 @@ export default function Login() {
 
         {error && <div className="error">{error}</div>}
 
-        <form onSubmit={handleSubmit} className="form">
+        <form onSubmit={handleLogin} className="form">
           <label className="label">
             Email
             <input
@@ -67,6 +73,5 @@ export default function Login() {
         </p>
       </div>
     </div>
-  )
+  );
 }
-

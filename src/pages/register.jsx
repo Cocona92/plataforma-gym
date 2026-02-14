@@ -1,40 +1,44 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { signUp } from "../services/auth";
 
 export default function Register() {
-  const [fullName, setFullName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState("")
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  function handleSubmit(e) {
-    e.preventDefault()
-
-    setError("")
-    setSuccess("")
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
 
     if (!fullName || !email || !password || !confirmPassword) {
-      setError("Por favor completa todos los campos.")
-      return
+      setError("Por favor completa todos los campos.");
+      return;
     }
 
     if (password.length < 8) {
-      setError("La contraseña debe tener al menos 8 caracteres.")
-      return
+      setError("La contraseña debe tener al menos 8 caracteres.");
+      return;
     }
 
     if (password !== confirmPassword) {
-      setError("Las contraseñas no coinciden.")
-      return
+      setError("Las contraseñas no coinciden.");
+      return;
     }
 
-  
-    console.log("Registro con:", { fullName, email, password })
-    setSuccess("¡Registro exitoso!")
-  }
+    try {
+      await signUp({ email, password });
+      console.log("Registro con:", { fullName, email, password });
+      setSuccess("¡Registro exitoso!");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <div className="page">
@@ -46,7 +50,7 @@ export default function Register() {
         {error && <div className="error">{error}</div>}
         {success && <div className="success">{success}</div>}
 
-        <form onSubmit={handleSubmit} className="form">
+        <form onSubmit={handleRegister} className="form">
           <label className="label">
             Nombre completo
             <input
@@ -104,6 +108,5 @@ export default function Register() {
         </p>
       </div>
     </div>
-  )
+  );
 }
-   
