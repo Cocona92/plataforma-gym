@@ -38,6 +38,28 @@ export async function getCurrentUserRole() {
   return profile.role;
 }
 
+export async function getCurrentUserProfile() {
+  const { data: userData, error: userError } = await supabase.auth.getUser();
+
+  if (userError) throw userError;
+  if (!userData.user) return null;
+
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("full_name, role")
+    .eq("id", userData.user.id)
+    .single();
+
+  if (profileError) throw profileError;
+
+  return {
+    id: userData.user.id,
+    email: userData.user.email,
+    fullName: profile.full_name,
+    role: profile.role,
+  };
+}
+
 export async function signIn({ email, password }) {
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
