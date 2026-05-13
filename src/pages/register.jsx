@@ -32,7 +32,7 @@ export default function Register() {
     }
 
     try {
-      await signUp({ email, password });
+      await signUp({ email, password, fullName });
       console.log("Registro con:", { fullName, email, password });
       setSuccess("¡Registro exitoso!");
     } catch (error) {
